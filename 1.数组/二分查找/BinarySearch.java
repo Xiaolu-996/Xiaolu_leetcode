@@ -6,7 +6,7 @@
  * @solution : 选取一个mid值，在有序数组中，如果target>a[mid]则到右边区间搜索，若小于则去左边区间搜索
  * @connect :类似题目 34/剑指offer 53
  */
-public class Search {
+public class BinarySearch {
 
 public static void main(String[] args) {
 	int[] nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -99,7 +99,7 @@ public static int rightBound(int[] nums, int target) {
 	while (left < right) {
 		int mid = left + (right - left) / 2;
 		if (nums[mid] == target) {
-			// 收紧左侧边界以锁定右侧边界
+			// 收紧左侧边界以锁定右侧边界，左侧收缩为left=mid+1
 			left = mid + 1;
 		} else if (nums[mid] < target) {
 			left = mid + 1;
@@ -107,7 +107,7 @@ public static int rightBound(int[] nums, int target) {
 			right = mid;
 		}
 	}
-	// 注意右侧边界为right-1
+	// 又因为收紧左侧边界时必须 left = mid + 1，所以最后无论返回 left 还是 right，必须减一
 	return right - 1;
 }
 }
