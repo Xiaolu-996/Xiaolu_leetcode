@@ -1,7 +1,7 @@
 /**
  * @author :lujianbin
  * @create :2022-11-11 14:50:00
- * @order : 704——二分查找
+ * @order : leetcode_704——二分查找
  * @description : 给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ， 写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
  * @solution : 选取一个mid值，在有序数组中，如果target>a[mid]则到右边区间搜索，若小于则去左边区间搜索
  * @connect :类似题目 34/剑指offer 53
@@ -72,15 +72,19 @@ public static int search2(int[] nums, int target) {
 // 3.寻找左侧边界的二分搜索
 public static int leftBound(int[] nums, int target) {
 	int left = 0;
-	int right = nums.length;   // 注意右侧为开区间
-	while (left < right) {      // 注意
+	// 注意右侧为开区间
+	int right = nums.length;
+	// 注意while结束条件不包含等于
+	while (left < right) {
 		int mid = left + (right - left) / 2;
 		if (nums[mid] == target) {
+			// 收紧右侧边界以锁定左侧边界
 			right = mid;
 		} else if (nums[mid] < target) {
 			left = mid + 1;
 		} else if (nums[mid] > target) {
-			right = mid; // 注意
+			// target 在左区间，在[left, middle)中,右侧为开区间
+			right = mid;
 		}
 	}
 	return left;
@@ -95,13 +99,15 @@ public static int rightBound(int[] nums, int target) {
 	while (left < right) {
 		int mid = left + (right - left) / 2;
 		if (nums[mid] == target) {
-			left = mid + 1; // 注意
+			// 收紧左侧边界以锁定右侧边界
+			left = mid + 1;
 		} else if (nums[mid] < target) {
 			left = mid + 1;
 		} else if (nums[mid] > target) {
 			right = mid;
 		}
 	}
-	return right - 1; // 注意
+	// 注意右侧边界为right-1
+	return right - 1;
 }
 }
