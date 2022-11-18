@@ -32,12 +32,14 @@ public static int shipWithinDays(int[] weights, int days) {
 		if (days == check (weights, mid)) {
 			// 天数相同的情况下，收紧右侧边界以锁定左侧边界，即船的最小载重量
 			right = mid;
-		} else if (days > check (weights, mid)) {
-			//  如果运输天数count小于要求的 days否则就调整最大的运输容量
-			right = mid;
-		} else if (days < check (weights, mid)) {
-			// 如果运输天数count大于要求的 days，那么就调整最小的运输容量
+		} else if (check (weights, mid) > days) {
+			//当前容量运完货物所需的天数 大于 输入天数
+			//则船的容量需要增加才能在规定天数内运完货物
 			left = mid + 1;
+		} else if (check (weights, mid) < days) {
+			//当前容量运完货物所需的天数 大于 输入天数
+			//则在天数满足的条件下减小船的容量
+			right = mid;
 		}
 	}
 	return left;
@@ -45,7 +47,7 @@ public static int shipWithinDays(int[] weights, int days) {
 
 
 // 定义：当运载能力为 x 时，需要 f(x) 天运完所有货物, f(x) 随着 x 的增加单调递减、
-// 当前mid 尝试的容量大小，需要多少天运送完货物
+// 当前mid尝试的容量大小，需要多少天运送完货物
 public static int check(int[] weights, int x) {
 	int days = 0;
 	for (int i = 0; i < weights.length; ) {
