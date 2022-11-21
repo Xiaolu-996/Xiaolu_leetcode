@@ -1,4 +1,4 @@
-package MianShi_0201;
+package Interview0201;
 
 
 /**
@@ -9,7 +9,6 @@ package MianShi_0201;
 public class ListNode {
 	public int val;
 	public ListNode next;
-
 	public ListNode(int x) {
 		val = x;
 	}

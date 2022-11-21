@@ -1,4 +1,4 @@
-package JianZhioffer_06;
+package SwordOffer06;
 
 /**
  * @author :lujianbin
